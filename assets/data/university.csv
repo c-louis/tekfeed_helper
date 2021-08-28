@@ -1,0 +1,111 @@
+Country,City,Institution,Dates,Language,Dual Degree,GPA,English level,fees,places
+South Africa,Port Elizabeth,Nelson Mandela University,h 25/06/2020 - 30/10/2020 27/01/2021 - 05/06/2021,English,FALSE,0,FALSE,0,10
+Argentina,La Plata,National University of La Plata,Aug – Dec – Mar – Jun,Spanish,FALSE,0,TRUE,0,4
+Brazil,Belo Horizonte,PUC Minas,Aug – Nov – Fab – Jun,Portuguese,FALSE,0,FALSE,0,5
+Brazil,Rio de janeiro,PUC Rio,Aug – Nov – Fab – Jun,Portuguese,FALSE,0,FALSE,0,3
+Canada,Montreal,Concordia University,08/09/2020 - 23/12/2020 06/01/2021 - 02/05/2021,English,FALSE,2.5,TRUE,0,4
+Canada,Quebec,Laval University – Information technology certificate – non diploma program,31/08/ 2020 - 11 /12/2020 11/01/ 2021- 23 /04/ 2021 ,French,FALSE,2,FALSE,700,25
+Canada,Quebec,Laval University – Information technology certificate – diploma program,31/08/ 2020 - 11 /12/2020 11/01/ 2021- 23 /04/ 2021 ,French,TRUE,2,FALSE,2100,25
+Canada,Brimouski,University of Quebec Rimouski UQAR,29/08/2020 - 18/12/2020 04/01/2021 - 24/04/2021,French,TRUE,2.5,FALSE,1000,30
+Canada,Saguenay,University of Quebec Chicoutimi UQAC,31/08/2020 - 21/12/2020 06/01/2021 - 30/04/2021 ,French,FALSE,0,FALSE,0,10
+Chili,Santiago,Universidad Finis Terrae,Beginning of August - December End of February - July,Spanish,FALSE,0,TRUE,0,5
+Colombia,Bogota,National University of Colombia UNAL,August - December February - June ,Spanish,FALSE,0,TRUE,0,5
+Mexico,Monterrey,Universidad de Monterrey,Beginning of August - End of November Mid- January - Mid-May,Spanish,FALSE,0,TRUE,0,6
+Mexico,Monterrey,Universidad Tecmilenio,Mid-August - Early December Late January - Late May,Spanish,FALSE,0,TRUE,0,10
+USA,Boston,Boston University Metropolitan College,2/09/20 - 19/12/20 19/01/21 - 8/05/21 ,English,FALSE,0,TRUE,13400,15
+USA,Long Beach,California State University Long Beach CSULB,25/10/2020 - 11/12/2020 19/01/21 - 21/06/21,English,FALSE,0,FALSE,2400,25
+USA,Long Beach,California State University Long Beach CSULB,Mid-August to Mid-December Mid-January to Mid-May,English,FALSE,0,FALSE,5100,20
+USA,Berkeley,University of California Berkeley,2020 dates for guidance: Session A : 26/05/2020 - 02/07/2020 Session C : 22/06/20 - 14/08/20 ,English,FALSE,0,TRUE,6700,10
+USA,Berkeley,University of California Berkeley,19/08/2020 - 18/12/2020 12/01/2021 - 14/05/2021,English,FALSE,2.8,TRUE,30500,5
+USA,San Francisco,San Francisco State University,Late August - mid-December End of January - late May,English,TRUE,0,FALSE,5200,15
+USA,San Marcos,California State University San Marcos Deferred Start,25/01/21 - 27/05/21 Summer 2020 Dates for Reference: 06/01/20 - 13/08/20,English,FALSE,0,FALSE,2100,30
+USA,San Marcos,California State University San Marcos Full year,31/08/20 - 23/12/20 25/01/21 - 27/05/21,English,FALSE,0,FALSE,5200,30
+USA,San diago,"University of California, San Diego 2 quarters",) 29/12/2020 - 20/03/21 22/03/21 - 11/06/21,English,FALSE,2.5,TRUE,9500,5
+USA,San Diego,"University of California, San Diego 3 quarters",24/09/2020 - 19/12/2020 29/12/2020 - 20/03/21 22/03/21 - 11/06/21,English,TRUE,2.5,TRUE,16000,10
+USA,Brockport,The College at Brockport,04/01/2021 - 19/05/2021,English,FALSE,0,FALSE,3500,15
+USA,Miami,Florida International University,23/08/21 - 11/12/21 10/01/22 - 30/04/22,English,FALSE,0,TRUE,4900,20
+USA,Detroit,Wayne State University,30/08/20 - 31/12/20 11/01/2021 - 4/05/2021 ,English,FALSE,0,TRUE,0,10
+Australia,Sydney,Australian Catholic University,27/07/2020 - 22/11/2020 01/03/2021 - 27/06/2021,English,FALSE,0,TRUE,5500,15
+Australia,Sydney,Australian Catholic University,9/11/2020 start of the EAP Programme (Fist semester) + February 2021 Study Abroad Programme (second semester),English,FALSE,0,TRUE,2200,-1
+Australia,Melbourne,Monash University,14/07/2020 - 20/11/2020 16/02/2021 - 25/06/2021,English,FALSE,3,TRUE,7800,5
+Australia,Melbourne,Royal Melbourne Institure of Technology,20/07/2020 - 13/11/2020 01/03/2021 - 18/06/2021,English,FALSE,2,TRUE,6400,10
+China,Beijing,Beijing Jiaotong University,"Academic week starts from August 31th, 2020",English,TRUE,0,FALSE,0,60
+China,Harbin,Harbin Engineering University,01/09/2020 - 10/01/2021 01/03/2021 - 01/07/2021,English,FALSE,0,FALSE,0,8
+China,Xi’an,Northwestern Polytechnical University,01/09/2020 - 10/01/2021 Spring semester is not fixed,English,FALSE,0,FALSE,0,10
+China,Shanghai,Tongji University Visiting program,07/09/2020 - 22/01/2021 Spring semester is not fixed,English,FALSE,0,FALSE,0,10
+China,Beijing,Tsinghua University Degree seeking program,For reference: 2019-2020 orientation last week of august 01/09/2019 to 15/07/2020 ,English,TRUE,3.2,FALSE,0,5
+China,Beijing,Tsinghua University Degree seeking program,For reference: orientation end of August 20/08/2019 to 15/07/2020,English,FALSE,3,FALSE,0,8
+China,Tianjin,Tianjin University,For reference: begin September 2019 to begin July 2020,English,FALSE,0,FALSE,0,10
+China,Wuhan,Wuhan University,For reference: 2019-2020: 02/09/2019 to 20/06/2020,English,FALSE,0,FALSE,0,5
+China,Beijing,Beijing Institute of Technology – BIT,Fall semester: September - January Spring semester: Feb,English,FALSE,0,FALSE,0,10
+China,Shenzhen,The Chinese University of Hong Kong Shenzhen,September - January February – June ,English,FALSE,3,FALSE,0,3
+China,Suzhou,Xi’an Jiaotong-Liverpool University,End of August 2020 - End of July 2021,English,FALSE,0,TRUE,0,3
+China,Hong Kong,The Hong Kong University of Science and Technology HKUST,07/09/2020 - 22/12/2020 01/02/2021 - 28/05/2021,English,FALSE,3,TRUE,12000,6
+Japan,Tokyo,Shibaura Institute of Technology SIT,end of September - end of January / early April - end of July,English,FALSE,0,FALSE,0,5
+Taiwan,Taiwan,Feng chia University,14/09/2020 - 15/01/2021 22/02/2021 - 25/06/2021,English,FALSE,0,FALSE,0,3
+Taiwan,Taipei,National Taipei University of Technology – Taipei Tech,14/09/2020 - 31/01/2021 22/02/2021 - 26/06/2021,English,FALSE,0,FALSE,0,5
+Taiwan,Hsinchu,National Tsinghua University,begin September to January & mi-February to end of June,English,FALSE,0,FALSE,0,4
+Taiwan,Chiayl,National Chung Cheng University,September - January February – June ,English,FALSE,0,FALSE,0,3
+Taiwan,New taipei City,National Taipei University,Early September - Mid January Early March - Mid June,English,FALSE,0,FALSE,0,5
+Singapore,Singapore,James Cook University Singapore,November - June ,English,FALSE,0,TRUE,11100,5
+South Korea,Seoul,Chung-Ang University,September - December February - June ,English,FALSE,0,FALSE,0,45
+South Korea,Daegu,Keimyung University,01/09/2020 - 23/12/2020 02/03/2021 - 23/06/2021,English,FALSE,0,FALSE,0,60
+South Korea,Incheon,Inha University,31/08/2020 - 18/12/2020 February to June 2021 ,English,FALSE,0,FALSE,0,13
+South Korea,Sejong,Korea University Sejon Campus,28/08/2020 to june 2021 (tentative schedule),English,FALSE,2.5,FALSE,0,8
+South Korea,Yongin,Dankook University,August - Decembre February - June,English,FALSE,0,FALSE,0,4
+South Korea,Seoul,Soongsil University,September - Decembre February – June,English,FALSE,0,FALSE,0,4
+India,Manipal,Manipal Academy of Higher Education,July - November January - May,English,FALSE,0,TRUE,0,5
+India,Rajpura,Chitkara University,18/07/2020 - 22/12/2020 09/01/2021 - 22/05/2021 ,English,FALSE,0,FALSE,0,4
+Indonesia,Surabaya,Sepuluh Nopenber Institute of Technology,31/08/2020 - 18/12/2020 Spring semester is not fixed,English,FALSE,0,FALSE,0,5
+Indonesia,Jakarta,BINUS University,September - February February - July ,English,FALSE,0,FALSE,0,5
+Malaysia,Kuala Lumpur,University Kuala Lumpur,20/07/2020 - 13/12/2020 Spring semester is not fixed (February-June),English,FALSE,0,FALSE,0,10
+Thailand,Bangkok,Thammasat University,August – December January – May ,English,FALSE,0,FALSE,0,5
+Bahrain,Manama,Ahlia University,25/08/2020 - 06/01/2021 25/01/2021- 10/05/2021,English,FALSE,0,FALSE,1500,25
+Germany,Hof,Hof University of Applied Sciences,16/09/2020 - 14/03/2021 16/03/2021 - 31/07/2021,English,FALSE,0,FALSE,0,5
+Germany,Stuttgart,University of Applied Sciences Stuttgart,28/09/2020 - 12/02/2021 08/03/2021 - 16/07/2021,English,FALSE,0,FALSE,0,5
+Germany,Stuttgart,Duale Hochschule BadenWürttemberg,mid September - February / mid-March- July,English,FALSE,0,FALSE,0,3
+Germany,Gummersbach,Cologne University of Applied Sciences ,end of October 2020 - begin of February 2021 / begin April - mid-July 2021,English,FALSE,0,FALSE,0,4
+Germany,Berlin,Campus Epitech Berlin ,07/09/2020 - 17/01/2021 01/02/2021 - 30/05/2021 ,English,FALSE,0,FALSE,0,50
+Belgium,Ghent,Hogent,17/09/2020 - 30/01/2021 08/02/2021 - 25/06/2021 ,English,FALSE,0,FALSE,0,2
+Belgium,Brussels,Campus Epitech Brussels,07/09/2020 - 17/01/2021 01/02/2021 - 30/05/2021 ,English,FALSE,0,FALSE,0,50
+Croatia,Varazdin,University of Zagreb ,01/10/2020 - 19/02/2021 22/02/2021 - 09/07/2021,English,FALSE,0,TRUE,0,5
+Croatia,Zagreb,Algebra University College ,29/09/2020 - 23/07/2021,English,FALSE,0,FALSE,0,5
+Denmark,Roskilde,Roskilde University,01/09/2020 - 30/12/2020 02/01/2021 - 30/06/2021,English,FALSE,0,TRUE,0,2
+Spain,Madrid,Universidad CEU San Pablo,07/09/2020 - 21/12/2020 09/02/2021 - 27/05/2020 ,Spanish,FALSE,0,TRUE,0,3
+Spain,Barcelona,Universidad de Vic Universidad Central de Cataluña ,02/09/2019 - 21/12/2019 22/01/2020 - 14/05/2020 ,English,FALSE,0,FALSE,0,3
+Spain,Madrid,U-tad Centro Universitario de Tecnología y Arte Digital ,begin of September - end of June,Spanish,FALSE,0,TRUE,0,2
+Spain,Malada,University of Malaga ,18/09/2020 - 24/01/2020 14/02/2021 - 09/07/2021,Spanish,FALSE,0,TRUE,0,3
+Spain,Cadiz,Universidad de Cádiz,end of September- begin July,Spanish,FALSE,0,TRUE,0,3
+Spain,Huelva,Universidad de Huelva,21/09/2020 -30/06/2021,Spanish,FALSE,0,TRUE,0,3
+Spain,Barcelona,Campus Epitech Barcelona ,07/09/20 - 17/01/21 01/02/21 - 30/05/21 ,English,FALSE,0,FALSE,0,50
+Finland,Espoo,Laurea University of Applied Sciences ,19/08/2020 - 18/12/2020 08/01/2021 - 28/05/2021,English,FALSE,0,FALSE,0,5
+Hungary,Peçs,University of Pecs ,26/08/2020 - 19/01/2021– begining of February,English,FALSE,0,FALSE,0,4
+Hungary,Budapest,Budapest University of Technology and Economics,31/08/2020 - 26/01/2021 07/02/2021 - 21/06/2021,English,FALSE,2,FALSE,0,2
+Hungary,Budapest,Pazmany Peter Catholic University,31/08/2020 - 29/01/2021 - early February - end of June 2021,English,FALSE,2,TRUE,0,3
+Ireland,Dublin,Technological University Dublin,21/09/2020 - 15/01/2021 25/01/2021 - 18/06/2021 ,English,TRUE,0,FALSE,0,10
+Ireland,Dublin,Technological University Dublin,21/09/2020 - 15/01/2021 25/01/2021 - 18/06/2021 ,English,TRUE,0,FALSE,0,5
+Ireland,Dublin,Griffith University,14/09/2020 - 28/01/2021 04/02/2021- 30/05/2021,English,FALSE,0,TRUE,0,40
+Ireland,Dublin,Dublin City University,14/09/2020 - 12/12/2020 25/01/2021 - 17/05/2021 ,English,FALSE,0,FALSE,0,22
+Netherlands,La Haye,The Hague University of Applied Sciences ,Beginning of September - End of January / Beginning of February - End of July ,English,FALSE,0,FALSE,0,5
+Netherlands,Groningen,Hanze University of Applied Sciences,31/08/2020 - 18/12/2020 08/02/2021 - 09/07/2021 ,English,FALSE,0,FALSE,0,4
+Netherlands,Eindhoven,Fontys University of Applied Sciences ,01/09/2020- 20/12/2020 - 07/02/2021 - 25/06/2021,English,FALSE,0,FALSE,0,2
+Lithuania,Vilnius,Vilnius Gediminas Technical University ,27/08/2020 - 24/01/2021 02/02/2021 - 20/06/2021,English,FALSE,0,FALSE,0,5
+Lithuania,Kaunas,Vytautas Magnus University ,20/08/2020 - 23/12/2020 01/02/2021 - 30/06/2021,English,FALSE,0,FALSE,0,5
+Latvia,Valmeria,Vidzeme University of Applied Sciences ,mid-August /end of January - beginning of February / end of June,English,FALSE,0,FALSE,0,2
+Poland,Krakow,AGH University of science and technology ,early October - mid February end of February - end of June ,English,FALSE,0,FALSE,0,5
+Czech Republic,Ostrava,VSB Technical University of Ostrava ,14/09/2020 - 04/07/2021,English,FALSE,0,TRUE,0,5
+Romania,Bucarest,Politehnica University of Bucharest ,21/09/2020 - 11/06/2021,English,FALSE,2,FALSE,0,5
+Romania,Timisoara,West University of Timişoara ,23/09/2019 - 09/02/2020 24/02/2020 - 12/07/2020,English,FALSE,0,FALSE,0,5
+UK,Canterbury,University of Kent,21/09/2020 - 18/12/2020 18 /01/2021 - 09/04/2021 10/05/2021 – 30/08/2021,English,TRUE,2,TRUE,3200,50
+UK,Edimburg,Heriot-Watt University ,mid-September 2020 - end of August 2021,English,TRUE,2,TRUE,6400,25
+UK,Cardiff,Cardiff Metropolitan University ,14/09/2020 - 04/01/2021 - 11/01/2021 - 17/05/2021,English,FALSE,0,FALSE,0,2
+Russia,St Petersburg,ITMO University,31/08/2020 - 31/21/2021 11/01/2021 - 30/06/2021 ,English,FALSE,0,FALSE,0,5
+Russia,Moscow,Higher School of Economics ,01/09/2019 - 31/12/2019 09/01/2020 - 30/06/2020 ,English,FALSE,0,FALSE,0,4
+Russia,St Petersburg,The Bonch-Bruevich St Petersburg State University of Telecommunications,26/08/2020 - 18/12/2020 08/02/2021 - 18/06/2021 ,English,FALSE,0,FALSE,0,50
+Russia,Tomsk,TUSUR - Tomsk State University of Control Systems and Radioelectronics,beginning of September - End of January / Beginning of February - End of June,English,FALSE,0,FALSE,0,10
+Sweden,Jonkoping,Jönköping University,17/08/2020 - 20/21/2020 18/01/2021 - 06/06/2021 ,English,FALSE,0,FALSE,0,15
+Sweden,Jonkoping,Jönköping University,17/08/2020 - 20/21/2020 18/01/2021 - 06/06/2021 ,English,FALSE,0,FALSE,0,15
+Sweden,Stockholm,Stockholm University,31/08/2020 - 17/01/2021 18/01/2021 - 05/06/2021,English,FALSE,0,FALSE,0,3
+Sweden,Halmstad,Halmstad University,26/08/2020 - 06/06/2021,English,FALSE,0,FALSE,0,5
+Turkey,Istanbul,Koç University ,29/09/2020 - 26/01/2021 15/02/2021 - 25/06/2021,English,FALSE,0,FALSE,0,5
+Turkey,Istanbul,Istanbul Technical University,11/09/2019 - 14/01/2020 10/02/2021 - 07/06/2021,English,FALSE,0,FALSE,0,5

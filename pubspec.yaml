@@ -1,0 +1,32 @@
+name: tekfeed_helper
+description: A website to help choose university for 4th year in Epitech
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  csv: ^5.0.0
+  vrouter: ^1.2.0+11
+  http: ^0.13.3
+  json_annotation: ^4.0.1
+  web_scraper: ^0.1.4
+  shared_preferences: ^2.0.7
+
+dev_dependencies:
+  build_runner: ^2.1.1
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^4.1.4
+  lints: ^1.0.1
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/university.csv
