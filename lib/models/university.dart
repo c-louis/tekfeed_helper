@@ -114,7 +114,7 @@ class IcuRanking {
       Uri uriRank = Uri.parse(rankLink);
       if (uriRank.path.indexOf('reviews') != -1) {
         WebScraper uniScrapper = WebScraper('http://tekfeed-proxy.cl-dev.ovh');
-        if (await uniScrapper.loadWebPage('proxy.php?url=' + uriRank.origin + uriRank.path + '&mode=native')) {
+        if (await uniScrapper.loadWebPage('/proxy.php?url=' + uriRank.origin + uriRank.path + '&mode=native')) {
           var elements = uniScrapper.getElement('table.text-right > tbody > tr', []);
           var countryRank = elements[0]['title'].toString().substring(15, elements[0]['title'].toString().length);
           var worldRank = elements[1]['title'].toString().substring(13, elements[1]['title'].toString().length);
