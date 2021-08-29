@@ -90,8 +90,8 @@ class CostOfLiving {
   static Future<Map<String, CostOfLiving>> scrapFromWeb() async {
     Map<String, CostOfLiving> costOfLivings = {};
 
-    final webScraper = WebScraper('https://www.numbeo.com');
-    if (await webScraper.loadWebPage('/cost-of-living/rankings_by_country.jsp')) {
+    final webScraper = WebScraper('http://tekfeed-proxy.cl-dev.ovh');
+    if (await webScraper.loadWebPage('/proxy.php?url=https://www.numbeo.com/cost-of-living/rankings_by_country.jsp&mode=native')) {
       List<Map<String, dynamic>> elements = webScraper.getElement('table#t2 > tbody > tr > td', ['title']);
 
       for (int i = 0; i < elements.length; i += 8) {
