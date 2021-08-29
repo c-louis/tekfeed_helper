@@ -55,38 +55,28 @@ class University {
 
 @JsonSerializable()
 class ShanghaiRankedUniversity {
-  // ignore: non_constant_identifier_names
-  final String university_name;
-  // ignore: non_constant_identifier_names
-  final String national_rank;
-  // ignore: non_constant_identifier_names
-  final String? iso2_code;
-  // ignore: non_constant_identifier_names
-  final String? iso3_code;
-  // ignore: non_constant_identifier_names
-  final String world_rank;
-  // ignore: non_constant_identifier_names
-  final double? total_score;
+  final String universityName;
+  final int worldRank;
+  final String countryName;
 
-  ShanghaiRankedUniversity(this.university_name, this.national_rank, this.iso2_code, this.iso3_code, this.world_rank, this.total_score);
+  ShanghaiRankedUniversity(this.universityName, this.worldRank, this.countryName);
   factory ShanghaiRankedUniversity.fromJson(json) => _$ShanghaiRankedUniversityFromJson(json);
-  factory ShanghaiRankedUniversity.empty() => ShanghaiRankedUniversity(
-    'UNKNOWN', '', '', '', '', 0);
+  factory ShanghaiRankedUniversity.empty() => ShanghaiRankedUniversity('UNKNOWN', 0, '');
   Map<String, dynamic> toJson() => _$ShanghaiRankedUniversityToJson(this);
 
-  static Future<List<ShanghaiRankedUniversity>> loadFromApi() async {
-      List<ShanghaiRankedUniversity> sru = [];
+  static Future<List<ShanghaiRankedUniversity>> loadFromAssets() async {
+    List<ShanghaiRankedUniversity> ranks = [];
+    String csvContent = await rootBundle.loadString('assets/data/shanghai.csv');
+    List<List<dynamic>> rowsAsListOfValues = const CsvToListConverter(eol: '\n').convert(csvContent);
 
-      var url = Uri.parse('https://public.opendatasoft.com/api/records/1.0/search/?dataset=shanghai-world-university-ranking&q=&rows=520&sort=world_rank&facet=university_name&facet=world_rank&facet=national_rank&facet=year&refine.year=2018');
-      var response = await http.get(url);
-      var jsonResponse = jsonDecode(response.body);
-      var records = jsonResponse['records'];
-      for (var record in records) {
-        sru.add(
-          ShanghaiRankedUniversity.fromJson(record['fields']),
-        );
-      }
-      return Future.value(sru);
+    for (int i = 1; i < rowsAsListOfValues.length; i++) {
+      ranks.add(ShanghaiRankedUniversity(
+        (rowsAsListOfValues[i][1] as String).trim(),
+        rowsAsListOfValues[i][0],
+        (rowsAsListOfValues[i][2] as String).trim()
+      ));
+    }
+    return ranks;
   }
 
   Future<void> save(University uni) async {
@@ -130,8 +120,8 @@ class IcuRanking {
           var worldRank = elements[1]['title'].toString().substring(13, elements[1]['title'].toString().length);
           try {
             return Future.value(IcuRanking(
-              int.parse(countryRank.toString()),
-              int.parse(worldRank.toString())
+              int.parse(worldRank.toString()),
+              int.parse(countryRank.toString())
             ));
           } catch (e) {
           }

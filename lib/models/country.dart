@@ -76,7 +76,6 @@ class Language {
 }
 
 class CostOfLiving {
-  // /cost-of-living/rankings_by_country.jsp
   final double costOfLivingIndex;
   final double rentIndex;
   final double costOfLivingPlusRentIndex;

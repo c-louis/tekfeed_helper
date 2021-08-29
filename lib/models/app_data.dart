@@ -6,6 +6,10 @@ class AppData {
   List<University> unis = [];
   List<Country> countries = [];
 
+  Future<void> loadData() async {
+    await loadUnis();
+    await loadCountries();
+  }
 
   Future<void> loadUnis() async {
     unis = await University.loadFromAssets();
@@ -94,16 +98,25 @@ class AppData {
 
   Future<void> setShanghaiRankedUniversity() async {
     int notFound = 0;
-    List<ShanghaiRankedUniversity> sranks = await ShanghaiRankedUniversity.loadFromApi();
-    unis.forEach((uni) {
+    List<ShanghaiRankedUniversity> sranks = await ShanghaiRankedUniversity.loadFromAssets();
+    for (var uni in unis) {
       ShanghaiRankedUniversity rank = sranks.firstWhere(
-            (element) => uni.school.toLowerCase().indexOf(element.university_name.toLowerCase()) != -1,
+        (element) {
+          if (uni.school == 'National Tsinghua University') {
+            return uni.school.toLowerCase() ==
+                element.universityName.toLowerCase();
+          }
+          return uni.school.toLowerCase().indexOf(
+            element.universityName.toLowerCase()) != -1;
+        },
         orElse: () => ShanghaiRankedUniversity.empty(),
       );
-      if (rank.university_name == 'UNKNOWN') {
+      if (rank.universityName == 'UNKNOWN') {
         notFound++;
+      } else {
+        uni.shanghaiRank = rank;
       }
-    });
+    }
     print('University without Shanghai Ranking : $notFound/${unis.length}');
   }
 

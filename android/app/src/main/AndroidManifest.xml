@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tekfeed_helper">
+    package="fr.clouis.tekfeed_helper">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="tekfeed_helper"
+        android:label="Tekfeed Helper"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -9,24 +9,18 @@ part of 'university.dart';
 ShanghaiRankedUniversity _$ShanghaiRankedUniversityFromJson(
     Map<String, dynamic> json) {
   return ShanghaiRankedUniversity(
-    json['university_name'] as String,
-    json['national_rank'] as String,
-    json['iso2_code'] as String?,
-    json['iso3_code'] as String?,
-    json['world_rank'] as String,
-    (json['total_score'] as num?)?.toDouble(),
+    json['universityName'] as String,
+    json['worldRank'] as int,
+    json['countryName'] as String,
   );
 }
 
 Map<String, dynamic> _$ShanghaiRankedUniversityToJson(
         ShanghaiRankedUniversity instance) =>
     <String, dynamic>{
-      'university_name': instance.university_name,
-      'national_rank': instance.national_rank,
-      'iso2_code': instance.iso2_code,
-      'iso3_code': instance.iso3_code,
-      'world_rank': instance.world_rank,
-      'total_score': instance.total_score,
+      'universityName': instance.universityName,
+      'worldRank': instance.worldRank,
+      'countryName': instance.countryName,
     };
 
 IcuRanking _$IcuRankingFromJson(Map<String, dynamic> json) {

@@ -1,4 +1,4 @@
-package com.example.tekfeed_helper
+package fr.clouis.tekfeed_helper
 
 import io.flutter.embedding.android.FlutterActivity
 
