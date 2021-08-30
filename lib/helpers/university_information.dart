@@ -104,4 +104,24 @@ class UniversityInformationHelper {
     }
     return max;
   }
+
+  static double maxGpa(List<University> unis) {
+    double max = 0;
+    for (var uni in unis) {
+      if (uni.gpa > max) {
+        max = uni.gpa;
+      }
+    }
+    return max;
+  }
+
+  static double minGpa(List<University> unis) {
+    double max = maxGpa(unis);
+    for (var uni in unis) {
+      if (uni.gpa < max) {
+        max = uni.gpa;
+      }
+    }
+    return max;
+  }
 }

@@ -30,6 +30,10 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
   // Fees slider Variable
   bool feesLimit = false;
   double feesMax = 0;
+  // Gpa Filters
+  bool noGpaRequired = false;
+  bool gpaRequiredLimit = false;
+  double gpaRequiredMax = 0;
 
   // Sort Activation Variable
   bool shanghaiRankedSort = false;
@@ -162,6 +166,43 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
                                     Text(UniversityInformationHelper.maxFee(unis).toString()),
                                   ],
                                 ),
+                              Filter(
+                                name: 'No GPA required',
+                                value: noGpaRequired,
+                                onChanged: (bool? status) {
+                                  noGpaRequired = status ?? false;
+                                  setStateFilter(() {});
+                                },
+                              ),
+                              Filter(
+                                name: 'Gpa Required limit',
+                                value: gpaRequiredLimit,
+                                onChanged: (bool? status) {
+                                  gpaRequiredLimit = status ?? false;
+                                  setStateFilter(() {});
+                                },
+                              ),
+                              if (gpaRequiredLimit)
+                                Row(
+                                  children: [
+                                    Text(UniversityInformationHelper.minGpa(unis).toString()),
+                                    Column(
+                                      children: [
+                                        Slider(
+                                          min: UniversityInformationHelper.minGpa(unis),
+                                          max: UniversityInformationHelper.maxGpa(unis),
+                                          value: gpaRequiredMax < UniversityInformationHelper.maxGpa(unis) ? gpaRequiredMax : UniversityInformationHelper.maxGpa(unis),
+                                          onChanged: (double? value) {
+                                            gpaRequiredMax = value ?? 0;
+                                            setStateFilter(() {});
+                                          },
+                                        ),
+                                        Text(gpaRequiredMax.toStringAsFixed(2)),
+                                      ],
+                                    ),
+                                    Text(UniversityInformationHelper.maxGpa(unis).toString()),
+                                  ],
+                                ),
                             ],
                           ),
                           actions: [
@@ -185,6 +226,12 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
                                 }
                                 if (feesLimit) {
                                   filteredUnis = UniversityFilterHelper.filterFeesInferior(filteredUnis, feesMax);
+                                }
+                                if (noGpaRequired) {
+                                  filteredUnis = UniversityFilterHelper.filterNoGPA(filteredUnis);
+                                }
+                                if (gpaRequiredLimit) {
+                                  filteredUnis = UniversityFilterHelper.filterGpaInferior(filteredUnis, gpaRequiredMax);
                                 }
                                 setState(() {});
                                 Navigator.of(context).pop();

@@ -66,4 +66,26 @@ class UniversityFilterHelper {
     }
     return filtered;
   }
+
+  static List<University> filterNoGPA(List<University> filteredUnis) {
+    List<University> filtered = [];
+
+    for (var uni in filteredUnis) {
+      if (uni.gpa == 0) {
+        filtered.add(uni);
+      }
+    }
+    return filtered;
+  }
+
+  static List<University> filterGpaInferior(List<University> filteredUnis, double value) {
+    List<University> filtered = [];
+
+    for (var uni in filteredUnis) {
+      if (uni.gpa <= value) {
+        filtered.add(uni);
+      }
+    }
+    return filtered;
+  }
 }
