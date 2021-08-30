@@ -21,13 +21,14 @@ class University {
   final bool languageRequired;
   final double additionalFees;
   final int places;
+  final int tekfeedId;
   @JsonKey(ignore: true) Country? country;
   @JsonKey(ignore: true) ShanghaiRankedUniversity? shanghaiRank;
   @JsonKey(ignore: true) IcuRanking? icuRank;
 
   University(this.countryName, this.city, this.school, this.dates, this.language,
     this.dualDegree, this.gpa, this.languageRequired, this.additionalFees,
-    this.places
+    this.places, this.tekfeedId
   );
 
   static Future<List<University>> loadFromAssets() async {
@@ -47,6 +48,7 @@ class University {
         rowsAsListOfValues[i][7] == 'FALSE' ? false : true,
         double.parse(rowsAsListOfValues[i][8].toString()),
         int.parse(rowsAsListOfValues[i][9].toString()),
+        int.parse(rowsAsListOfValues[i][10].toString()),
       ));
     }
     return Future.value(unis);
