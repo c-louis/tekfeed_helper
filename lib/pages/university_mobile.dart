@@ -26,6 +26,10 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
   String? language;
   bool shanghaiRankedOnly = false;
   bool icuRankedOnly = false;
+  bool noAdditionalFees = false;
+  // Fees slider Variable
+  bool feesLimit = false;
+  double feesMax = 0;
 
   // Sort Activation Variable
   bool shanghaiRankedSort = false;
@@ -121,6 +125,43 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
                                   setStateFilter(() {});
                                 },
                               ),
+                              Filter(
+                                name: 'No Additional Fees',
+                                value: noAdditionalFees,
+                                onChanged: (bool? status) {
+                                  noAdditionalFees = status ?? false;
+                                  setStateFilter(() {});
+                                },
+                              ),
+                              Filter(
+                                name: 'Additional Fees limit',
+                                value: feesLimit,
+                                onChanged: (bool? status) {
+                                  feesLimit = status ?? false;
+                                  setStateFilter(() {});
+                                },
+                              ),
+                              if (feesLimit)
+                                Row(
+                                  children: [
+                                    Text(UniversityInformationHelper.minFee(unis).toString()),
+                                    Column(
+                                      children: [
+                                        Slider(
+                                          min: UniversityInformationHelper.minFee(unis),
+                                          max: UniversityInformationHelper.maxFee(unis) + 1,
+                                          value: feesMax < UniversityInformationHelper.maxFee(unis) ? feesMax : UniversityInformationHelper.maxFee(unis),
+                                          onChanged: (double? value) {
+                                            feesMax = value ?? 0;
+                                            setStateFilter(() {});
+                                          },
+                                        ),
+                                        Text(feesMax.toStringAsFixed(2)),
+                                      ],
+                                    ),
+                                    Text(UniversityInformationHelper.maxFee(unis).toString()),
+                                  ],
+                                ),
                             ],
                           ),
                           actions: [
@@ -138,6 +179,12 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
                                 }
                                 if (icuRankedOnly) {
                                   filteredUnis = UniversityFilterHelper.filterIcuRankedOnly(filteredUnis);
+                                }
+                                if (noAdditionalFees) {
+                                  filteredUnis = UniversityFilterHelper.filterNoFees(filteredUnis);
+                                }
+                                if (feesLimit) {
+                                  filteredUnis = UniversityFilterHelper.filterFeesInferior(filteredUnis, feesMax);
                                 }
                                 setState(() {});
                                 Navigator.of(context).pop();
@@ -274,7 +321,7 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
               uni.country!.flag,
               height: 16,
             ),
-            title: Text(uni.school),
+            title: Text(uni.school + ' ' + uni.additionalFees.toString()),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

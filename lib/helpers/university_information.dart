@@ -84,4 +84,24 @@ class UniversityInformationHelper {
     }
     return max;
   }
+
+  static double maxFee(List<University> unis) {
+    double max = 0;
+    for (var uni in unis) {
+      if (uni.additionalFees > max) {
+        max = uni.additionalFees;
+      }
+    }
+    return max;
+  }
+
+  static double minFee(List<University> unis) {
+    double max = maxFee(unis);
+    for (var uni in unis) {
+      if (uni.additionalFees < max) {
+        max = uni.additionalFees;
+      }
+    }
+    return max;
+  }
 }

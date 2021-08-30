@@ -44,4 +44,26 @@ class UniversityFilterHelper {
     }
     return filtered;
   }
+
+  static List<University> filterNoFees(List<University> filteredUnis) {
+    List<University> filtered = [];
+
+    for (var uni in filteredUnis) {
+      if (uni.additionalFees == 0) {
+        filtered.add(uni);
+      }
+    }
+    return filtered;
+  }
+
+  static List<University> filterFeesInferior(List<University> filteredUnis, double value) {
+    List<University> filtered = [];
+
+    for (var uni in filteredUnis) {
+      if (uni.additionalFees < value) {
+        filtered.add(uni);
+      }
+    }
+    return filtered;
+  }
 }
