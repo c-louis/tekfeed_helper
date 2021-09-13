@@ -30,9 +30,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
-  assets:
-    - assets/data/university.csv
-    - assets/data/shanghai.csv
 
 flutter_icons:
   android: true

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
-import 'package:web_scraper/web_scraper.dart';
 
 part 'country.g.dart';
 
@@ -33,17 +32,12 @@ class Country {
 
   Country(this.name, this.topLevelDomain, this.alpha2Code, this.alpha3Code, this.callingCodes, this.capital, this.altSpellings, this.region, this.subregion, this.population, this.latlng, this.demonym, this.area, this.gini, this.timezones, this.borders, this.nativeName, this.numericCode, this.currencies, this.flag, this.cioc);
   factory Country.fromJson(json) => _$CountryFromJson(json);
-  factory Country.empty() => Country(
-    'UNKNOWN', [], '', '', [], '', [], '', '', 0, [], '', 0.0, 0.0, [], [],
-    '', '', [], '', '',
-  );
+  factory Country.empty() => Country('UNKNOWN', [], '', '', [], '', [], '', '', 0, [], '', 0.0, 0.0, [], [], '', '', [], '', '');
 
-  static Future<List<Country>> loadFromApi() async {
+  static Future<List<Country>> load() async {
     List<Country> countries = [];
-
     var url = Uri.parse('https://restcountries.eu/rest/v2/all');
     var response = await http.get(url);
-
     if (response.statusCode == 200) {
       var list = jsonDecode(response.body);
       for (var item in list) {
@@ -75,7 +69,9 @@ class Language {
   factory Language.fromJson(json) => _$LanguageFromJson(json);
 }
 
+@JsonSerializable()
 class CostOfLiving {
+  @JsonKey(name: 'country') final String countryName;
   final double costOfLivingIndex;
   final double rentIndex;
   final double costOfLivingPlusRentIndex;
@@ -83,29 +79,20 @@ class CostOfLiving {
   final double restaurantPriceIndex;
   final double localPurchasingPowerIndex;
 
-  CostOfLiving(this.costOfLivingIndex, this.rentIndex, this.costOfLivingPlusRentIndex,
-    this.groceriesIndex, this.restaurantPriceIndex, this.localPurchasingPowerIndex
-  );
+  CostOfLiving(this.countryName, this.costOfLivingIndex, this.rentIndex, this.costOfLivingPlusRentIndex, this.groceriesIndex, this.restaurantPriceIndex, this.localPurchasingPowerIndex,);
+  factory CostOfLiving.fromJson(json) => _$CostOfLivingFromJson(json);
 
-  static Future<Map<String, CostOfLiving>> scrapFromWeb() async {
-    Map<String, CostOfLiving> costOfLivings = {};
-
-    final webScraper = WebScraper('http://tekfeed-proxy.cl-dev.ovh');
-    if (await webScraper.loadWebPage('/proxy.php?url=https://www.numbeo.com/cost-of-living/rankings_by_country.jsp&mode=native')) {
-      List<Map<String, dynamic>> elements = webScraper.getElement('table#t2 > tbody > tr > td', ['title']);
-
-      for (int i = 0; i < elements.length; i += 8) {
-        costOfLivings[elements[i + 1]['title']] = CostOfLiving(
-          double.parse(elements[i + 2]['title']),
-          double.parse(elements[i + 3]['title']),
-          double.parse(elements[i + 4]['title']),
-          double.parse(elements[i + 5]['title']),
-          double.parse(elements[i + 6]['title']),
-          double.parse(elements[i + 7]['title']),
-        );
+  static Future<List<CostOfLiving>> load() async {
+    List<CostOfLiving> col = [];
+    var url = Uri.parse('http://tekfeed-api.local/col');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var list = jsonDecode(response.body);
+      for (var item in list) {
+        col.add(CostOfLiving.fromJson(item));
       }
     }
+    return Future.value(col);
 
-    return costOfLivings;
   }
 }

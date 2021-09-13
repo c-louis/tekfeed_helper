@@ -12,30 +12,17 @@ class AppData {
   }
 
   Future<void> loadUnis() async {
-    unis = await University.loadFromAssets();
+    unis = await University.load();
   }
 
   Future<void> loadCountries() async {
-    Stopwatch s = new Stopwatch()..start();
-    countries = await Country.loadFromApi();
-    print('Time to find countries : ${s.elapsed}');
-    s.reset();
+    countries = await Country.load();
     await this.setCostOfLivingsOnCountry();
-    print('Time to find cost of living : ${s.elapsed}');
-    s.reset();
     await this.setCountryOnUniversity();
-    print('Time to set country on University : ${s.elapsed}');
-    s.reset();
-    await this.setShanghaiRankedUniversity();
-    print('Time to find shanghai rank : ${s.elapsed}');
-    s.reset();
-    await this.setIcuRankOnUniversity();
-    print('Time to find icu ranked : ${s.elapsed}');
-    s.stop();
   }
 
   Future<void> setCostOfLivingsOnCountry() async {
-    Map<String, CostOfLiving> costOfLivings = await CostOfLiving.scrapFromWeb();
+    List<CostOfLiving> costOfLivings = await CostOfLiving.load();
     const Map<String, String> exceptionsCOL = {
       'South Korea': 'Korea (Republic of)',
       'Palestine': 'Palestine, State of',
@@ -51,9 +38,10 @@ class AppData {
     };
 
     int notFound = 0;
-    costOfLivings.forEach((name, costOfLiving) {
+    costOfLivings.forEach((costOfLiving) {
+      String name = costOfLiving.countryName;
       if (exceptionsCOL[name] != null) {
-        name = exceptionsCOL[name]!;
+        name = exceptionsCOL[costOfLiving.countryName]!;
       }
       Country country = countries.firstWhere(
             (element) => element.name == name || element.nativeName == name,
@@ -96,46 +84,4 @@ class AppData {
     print('University not linked to a Country : $notFound/${unis.length}');
   }
 
-  Future<void> setShanghaiRankedUniversity() async {
-    int notFound = 0;
-    List<ShanghaiRankedUniversity> sranks = await ShanghaiRankedUniversity.loadFromAssets();
-    for (var uni in unis) {
-      ShanghaiRankedUniversity rank = sranks.firstWhere(
-        (element) {
-          if (uni.school == 'National Tsinghua University') {
-            return uni.school.toLowerCase() ==
-                element.universityName.toLowerCase();
-          }
-          return uni.school.toLowerCase().indexOf(
-            element.universityName.toLowerCase()) != -1;
-        },
-        orElse: () => ShanghaiRankedUniversity.empty(),
-      );
-      if (rank.universityName == 'UNKNOWN') {
-        notFound++;
-      } else {
-        uni.shanghaiRank = rank;
-      }
-    }
-    print('University without Shanghai Ranking : $notFound/${unis.length}');
-  }
-
-  Future<void> setIcuRankOnUniversity() async {
-    int notFound = 0;
-    for (var uni in unis) {
-      IcuRanking? iRank = await IcuRanking.fromPrefs(uni);
-      if (iRank == null) {
-        iRank = await IcuRanking.fromScrapWithUni(uni);
-        if (iRank.worldRank != -1 && iRank.nationalRank != -1) {
-          iRank.save(uni);
-        }
-      }
-      if (iRank.worldRank == -1 && iRank.nationalRank == -1) {
-        notFound++;
-      } else {
-        uni.icuRank = iRank;
-      }
-    }
-    print('There is $notFound/${unis.length} without IcuRanking found !');
-  }
 }

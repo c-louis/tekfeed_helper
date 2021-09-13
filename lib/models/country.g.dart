@@ -89,3 +89,26 @@ Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
       'name': instance.name,
       'nativeName': instance.nativeName,
     };
+
+CostOfLiving _$CostOfLivingFromJson(Map<String, dynamic> json) {
+  return CostOfLiving(
+    json['country'] as String,
+    double.parse((json['costOfLivingIndex'] as String)),
+    double.parse((json['rentIndex'] as String)),
+    double.parse((json['costOfLivingPlusRentIndex'] as String)),
+    double.parse((json['groceriesIndex'] as String)),
+    double.parse((json['restaurantPriceIndex'] as String)),
+    double.parse((json['localPurchasingPowerIndex'] as String)),
+  );
+}
+
+Map<String, dynamic> _$CostOfLivingToJson(CostOfLiving instance) =>
+    <String, dynamic>{
+      'country': instance.countryName,
+      'costOfLivingIndex': instance.costOfLivingIndex,
+      'rentIndex': instance.rentIndex,
+      'costOfLivingPlusRentIndex': instance.costOfLivingPlusRentIndex,
+      'groceriesIndex': instance.groceriesIndex,
+      'restaurantPriceIndex': instance.restaurantPriceIndex,
+      'localPurchasingPowerIndex': instance.localPurchasingPowerIndex,
+    };

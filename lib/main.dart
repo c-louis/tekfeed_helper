@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:tekfeed_helper/models/app_data.dart';
 import 'package:tekfeed_helper/pages/university.dart';
 import 'package:vrouter/vrouter.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:io' show Platform;
 
 void main() {
   runApp(
@@ -30,7 +28,7 @@ class TekfeedRoutes extends StatelessWidget {
         VWidget(
           path: '/unis',
           widget: UniversityPage(),
-          name: 'Login',
+          name: 'unis',
         ),
       ],
       themeMode: ThemeMode.dark,
