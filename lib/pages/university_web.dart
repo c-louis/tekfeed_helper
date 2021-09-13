@@ -7,6 +7,7 @@ import 'package:tekfeed_helper/models/university.dart';
 import 'package:tekfeed_helper/widgets/dropdown_filter.dart';
 import 'package:tekfeed_helper/widgets/filter.dart';
 import 'package:tekfeed_helper/widgets/sorter.dart';
+import 'package:tekfeed_helper/widgets/university_details.dart';
 
 class UniversityWebPage extends StatefulWidget {
   final List<University> unis;
@@ -20,6 +21,7 @@ class UniversityWebPage extends StatefulWidget {
 class _UniversityWebPageState extends State<UniversityWebPage> {
   final List<University> unis;
   late List<University> filteredUnis;
+  University? selectedUni;
 
   // Filter Variable
   String? region;
@@ -60,40 +62,8 @@ class _UniversityWebPageState extends State<UniversityWebPage> {
 
   @override
   Widget build(BuildContext context) {
-    filteredUnis = unis;
-    if (region != null && region != 'None') {
-      filteredUnis = UniversityFilterHelper.filterRegion(filteredUnis, region!);
-    }
-    if (language != null && language != 'None') {
-      filteredUnis = UniversityFilterHelper.filterLanguage(filteredUnis, language!);
-    }
-    if (shanghaiRankedOnly) {
-      filteredUnis = UniversityFilterHelper.filterShanghaiOnly(filteredUnis);
-    }
-    if (icuRankedOnly) {
-      filteredUnis = UniversityFilterHelper.filterIcuRankedOnly(filteredUnis);
-    }
-    if (noAdditionalFees) {
-      filteredUnis = UniversityFilterHelper.filterNoFees(filteredUnis);
-    }
-    if (feesLimit) {
-      filteredUnis = UniversityFilterHelper.filterFeesInferior(filteredUnis, feesMax);
-    }
-    if (noGpaRequired) {
-      filteredUnis = UniversityFilterHelper.filterNoGPA(filteredUnis);
-    }
-    if (gpaRequiredLimit) {
-      filteredUnis = UniversityFilterHelper.filterGpaInferior(filteredUnis, gpaRequiredMax);
-    }
-    filteredUnis = UniversitySorterHelper.globalSort(
-      unis: filteredUnis,
-      shanghaiWeight: shanghaiRankedSort ? shanghaiRankedSortValue : null,
-      icuWeight: icuRankedSort ? icuRankedSortValue : null,
-      costOfLivingWeight: costOfLivingSort ? costOfLivingSortValue : null,
-      rentCostWeight: rentCostSort ? rentCostSortValue : null,
-      groceriesCostWeight: groceriesCostSort ? groceriesCostSortValue : null,
-      restaurantCostWeight: restaurantCostSort ? restaurantCostSortValue : null,
-    );
+    filteredUnis = applyFilters(unis);
+    filteredUnis = applySorters(filteredUnis);
     return Row(
       children: [
         Expanded(
@@ -227,31 +197,49 @@ class _UniversityWebPageState extends State<UniversityWebPage> {
             ),
           ),
         ),
-        Expanded(
-          flex: 6,
-          child: Card(
-            child: SingleChildScrollView(
-              child: DataTable(
-                columns: [
-                  DataColumn(label: Text('Flag')),
-                  DataColumn(label: Text('School name')),
-                  DataColumn(label: Text('Uni Language')),
-                  DataColumn(label: Text('Shanghai Rank')),
-                  DataColumn(label: Text('ICU Rank')),
-                ],
-                rows: filteredUnis.map((uni) => DataRow(
-                  cells: [
-                    DataCell(SvgPicture.network(uni.country!.flag, height: 32,)),
-                    DataCell(Text(uni.school)),
-                    DataCell(Text(uni.language)),
-                    DataCell(Text((uni.shanghaiRank != null ? uni.shanghaiRank!.worldRank.toString() : ''))),
-                    DataCell(Text((uni.icuRank != null ? uni.icuRank!.worldRank.toString() : ''))),
+        if (selectedUni == null)
+          Expanded(
+            flex: 6,
+            child: Card(
+              child: SingleChildScrollView(
+                child: DataTable(
+                  showCheckboxColumn: false,
+                  columns: [
+                    DataColumn(label: Text('Flag')),
+                    DataColumn(label: Text('School name')),
+                    DataColumn(label: Text('Uni Language')),
+                    DataColumn(label: Text('Shanghai Rank')),
+                    DataColumn(label: Text('ICU Rank')),
                   ],
-                )).toList(),
+                  rows: filteredUnis.map((uni) => DataRow(
+                    onSelectChanged: (bool? value) {
+                      selectedUni = uni;
+                      setState(() {});
+                    },
+                    cells: [
+                      DataCell(SvgPicture.network(uni.country!.flag, height: 32,)),
+                      DataCell(Text(uni.school)),
+                      DataCell(Text(uni.language)),
+                      DataCell(Text((uni.shanghaiRank != null ? uni.shanghaiRank!.worldRank.toString() : ''))),
+                      DataCell(Text((uni.icuRank != null ? uni.icuRank!.worldRank.toString() : ''))),
+                    ],
+                  )).toList(),
+                ),
               ),
             ),
           ),
-        ),
+        if (selectedUni != null)
+          Expanded(
+            flex: 6,
+            child: UniversityDetails(
+              selectedUni: selectedUni!,
+              closeWindow: () {
+                selectedUni = null;
+                setState(() {
+                });
+              },
+            )
+          ),
         Expanded(
           flex: 2,
           child: Card(
@@ -350,6 +338,47 @@ class _UniversityWebPageState extends State<UniversityWebPage> {
           ),
         ),
       ],
+    );
+  }
+
+  List<University> applyFilters(List<University> unis) {
+    var filteredUnis = unis;
+    if (region != null && region != 'None') {
+      filteredUnis = UniversityFilterHelper.filterRegion(filteredUnis, region!);
+    }
+    if (language != null && language != 'None') {
+      filteredUnis = UniversityFilterHelper.filterLanguage(filteredUnis, language!);
+    }
+    if (shanghaiRankedOnly) {
+      filteredUnis = UniversityFilterHelper.filterShanghaiOnly(filteredUnis);
+    }
+    if (icuRankedOnly) {
+      filteredUnis = UniversityFilterHelper.filterIcuRankedOnly(filteredUnis);
+    }
+    if (noAdditionalFees) {
+      filteredUnis = UniversityFilterHelper.filterNoFees(filteredUnis);
+    }
+    if (feesLimit) {
+      filteredUnis = UniversityFilterHelper.filterFeesInferior(filteredUnis, feesMax);
+    }
+    if (noGpaRequired) {
+      filteredUnis = UniversityFilterHelper.filterNoGPA(filteredUnis);
+    }
+    if (gpaRequiredLimit) {
+      filteredUnis = UniversityFilterHelper.filterGpaInferior(filteredUnis, gpaRequiredMax);
+    }
+    return filteredUnis;
+  }
+
+  List<University> applySorters(List<University> filteredUnis) {
+    return UniversitySorterHelper.globalSort(
+      unis: filteredUnis,
+      shanghaiWeight: shanghaiRankedSort ? shanghaiRankedSortValue : null,
+      icuWeight: icuRankedSort ? icuRankedSortValue : null,
+      costOfLivingWeight: costOfLivingSort ? costOfLivingSortValue : null,
+      rentCostWeight: rentCostSort ? rentCostSortValue : null,
+      groceriesCostWeight: groceriesCostSort ? groceriesCostSortValue : null,
+      restaurantCostWeight: restaurantCostSort ? restaurantCostSortValue : null,
     );
   }
 }

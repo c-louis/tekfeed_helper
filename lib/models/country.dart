@@ -26,13 +26,14 @@ class Country {
   final String nativeName;
   final String? numericCode;
   final List<Currency> currencies;
+  final List<Language> languages;
   final String flag;
   final String? cioc;
   @JsonKey(ignore: true) CostOfLiving? costOfLiving;
 
-  Country(this.name, this.topLevelDomain, this.alpha2Code, this.alpha3Code, this.callingCodes, this.capital, this.altSpellings, this.region, this.subregion, this.population, this.latlng, this.demonym, this.area, this.gini, this.timezones, this.borders, this.nativeName, this.numericCode, this.currencies, this.flag, this.cioc);
+  Country(this.name, this.topLevelDomain, this.alpha2Code, this.alpha3Code, this.callingCodes, this.capital, this.altSpellings, this.region, this.subregion, this.population, this.latlng, this.demonym, this.area, this.gini, this.timezones, this.borders, this.nativeName, this.numericCode, this.currencies, this.flag, this.cioc, this.languages);
   factory Country.fromJson(json) => _$CountryFromJson(json);
-  factory Country.empty() => Country('UNKNOWN', [], '', '', [], '', [], '', '', 0, [], '', 0.0, 0.0, [], [], '', '', [], '', '');
+  factory Country.empty() => Country('UNKNOWN', [], '', '', [], '', [], '', '', 0, [], '', 0.0, 0.0, [], [], '', '', [], '', '', []);
 
   static Future<List<Country>> load() async {
     List<Country> countries = [];
@@ -60,27 +61,36 @@ class Currency {
 
 @JsonSerializable()
 class Language {
-  final String iso639_1;
-  final String iso639_2;
-  final String name;
-  final String nativeName;
+  final String? iso639_1;
+  final String? iso639_2;
+  final String? name;
+  final String? nativeName;
 
   Language(this.iso639_1, this.iso639_2, this.name, this.nativeName);
   factory Language.fromJson(json) => _$LanguageFromJson(json);
 }
 
-@JsonSerializable()
 class CostOfLiving {
   @JsonKey(name: 'country') final String countryName;
-  final double costOfLivingIndex;
-  final double rentIndex;
-  final double costOfLivingPlusRentIndex;
-  final double groceriesIndex;
-  final double restaurantPriceIndex;
-  final double localPurchasingPowerIndex;
+  double costOfLivingIndex;
+  double rentIndex;
+  double costOfLivingPlusRentIndex;
+  double groceriesIndex;
+  double restaurantPriceIndex;
+  double localPurchasingPowerIndex;
 
   CostOfLiving(this.countryName, this.costOfLivingIndex, this.rentIndex, this.costOfLivingPlusRentIndex, this.groceriesIndex, this.restaurantPriceIndex, this.localPurchasingPowerIndex,);
-  factory CostOfLiving.fromJson(json) => _$CostOfLivingFromJson(json);
+  factory CostOfLiving.fromJson(json) {
+    return CostOfLiving(
+      json['country'] as String,
+      double.parse(json['costOfLivingIndex'] as String),
+      double.parse(json['rentIndex'] as String),
+      double.parse(json['costOfLivingPlusRentIndex'] as String),
+      double.parse(json['groceriesIndex'] as String),
+      double.parse(json['restaurantPriceIndex'] as String),
+      double.parse(json['localPurchasingPowerIndex'] as String),
+    );
+  }
 
   static Future<List<CostOfLiving>> load() async {
     List<CostOfLiving> col = [];

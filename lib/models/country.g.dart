@@ -33,6 +33,9 @@ Country _$CountryFromJson(Map<String, dynamic> json) {
         .toList(),
     json['flag'] as String,
     json['cioc'] as String?,
+    (json['languages'] as List<dynamic>)
+        .map((e) => Language.fromJson(e))
+        .toList(),
   );
 }
 
@@ -56,6 +59,7 @@ Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
       'nativeName': instance.nativeName,
       'numericCode': instance.numericCode,
       'currencies': instance.currencies,
+      'languages': instance.languages,
       'flag': instance.flag,
       'cioc': instance.cioc,
     };
@@ -76,10 +80,10 @@ Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
 
 Language _$LanguageFromJson(Map<String, dynamic> json) {
   return Language(
-    json['iso639_1'] as String,
-    json['iso639_2'] as String,
-    json['name'] as String,
-    json['nativeName'] as String,
+    json['iso639_1'] as String?,
+    json['iso639_2'] as String?,
+    json['name'] as String?,
+    json['nativeName'] as String?,
   );
 }
 
@@ -88,27 +92,4 @@ Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
       'iso639_2': instance.iso639_2,
       'name': instance.name,
       'nativeName': instance.nativeName,
-    };
-
-CostOfLiving _$CostOfLivingFromJson(Map<String, dynamic> json) {
-  return CostOfLiving(
-    json['country'] as String,
-    double.parse((json['costOfLivingIndex'] as String)),
-    double.parse((json['rentIndex'] as String)),
-    double.parse((json['costOfLivingPlusRentIndex'] as String)),
-    double.parse((json['groceriesIndex'] as String)),
-    double.parse((json['restaurantPriceIndex'] as String)),
-    double.parse((json['localPurchasingPowerIndex'] as String)),
-  );
-}
-
-Map<String, dynamic> _$CostOfLivingToJson(CostOfLiving instance) =>
-    <String, dynamic>{
-      'country': instance.countryName,
-      'costOfLivingIndex': instance.costOfLivingIndex,
-      'rentIndex': instance.rentIndex,
-      'costOfLivingPlusRentIndex': instance.costOfLivingPlusRentIndex,
-      'groceriesIndex': instance.groceriesIndex,
-      'restaurantPriceIndex': instance.restaurantPriceIndex,
-      'localPurchasingPowerIndex': instance.localPurchasingPowerIndex,
     };

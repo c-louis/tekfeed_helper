@@ -22,7 +22,8 @@ class AppData {
   }
 
   Future<void> setCostOfLivingsOnCountry() async {
-    List<CostOfLiving> costOfLivings = await CostOfLiving.load();
+    List<CostOfLiving> preCostOfLivings = await CostOfLiving.load();
+    List<CostOfLiving> costOfLivings = [];
     const Map<String, String> exceptionsCOL = {
       'South Korea': 'Korea (Republic of)',
       'Palestine': 'Palestine, State of',
@@ -36,6 +37,19 @@ class AppData {
       'Syria': 'Syrian Arab Republic',
       'Kosovo (Disputed Territory)': 'Republic of Kosovo',
     };
+    CostOfLiving france = preCostOfLivings.firstWhere((element) => element.countryName == 'France');
+    for (CostOfLiving col in preCostOfLivings) {
+      var c = CostOfLiving(
+        col.countryName,
+        col.costOfLivingIndex - france.costOfLivingIndex,
+        col.rentIndex - france.rentIndex,
+        col.costOfLivingPlusRentIndex - france.costOfLivingPlusRentIndex,
+        col.groceriesIndex - france.groceriesIndex,
+        col.restaurantPriceIndex - france.restaurantPriceIndex,
+        col.localPurchasingPowerIndex - france.localPurchasingPowerIndex,
+      );
+      costOfLivings.add(c);
+    }
 
     int notFound = 0;
     costOfLivings.forEach((costOfLiving) {

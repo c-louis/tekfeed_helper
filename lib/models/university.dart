@@ -25,7 +25,27 @@ class University {
   @JsonKey(ignore: true) Country? country;
 
   University(this.countryName, this.city, this.school, this.dates, this.language, this.dualDegree, this.gpa, this.languageRequired, this.additionalFees, this.places, this.tekfeedId);
-  factory University.fromJson(json) => _$UniversityFromJson(json);
+  factory University.fromJson(json) {
+    return University(
+      json['country'] as String,
+      json['city'] as String,
+      json['school'] as String,
+      json['dates'] as String,
+      json['language'] as String,
+      json['dualDegree'] == 'TRUE' ? true : false,
+      (double.parse(json['gpa'] as String)),
+      json['languageRequired'] == 'TRUE' ? true : false,
+      (json['additionalFees'] as num).toDouble(),
+      json['places'] as int,
+      json['tekfeedId'] as int,
+    )
+      ..shanghaiRank = json['shanghai_ranking'] == null
+          ? null
+          : ShanghaiRankedUniversity.fromJson(json['shanghai_ranking'])
+      ..icuRank = json['icu_ranking'] == null
+          ? null
+          : IcuRanking.fromJson(json['icu_ranking']);
+  }
   Map<String, dynamic> toJson() => _$UniversityToJson(this);
 
   static Future<List<University>> load() async {
