@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tekfeed_helper/helpers/university_filter.dart';
 import 'package:tekfeed_helper/helpers/university_information.dart';
 import 'package:tekfeed_helper/helpers/university_sorter.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tekfeed_helper/widgets/dropdown_filter.dart';
 import 'package:tekfeed_helper/widgets/filter.dart';
 import 'package:tekfeed_helper/widgets/sorter.dart';
+import 'package:tekfeed_helper/widgets/university_details.dart';
 
 class UniversityMobilePage extends StatefulWidget {
   List<University> unis;
@@ -20,6 +22,7 @@ class UniversityMobilePage extends StatefulWidget {
 class _UniversityMobilePageState extends State<UniversityMobilePage> {
   final List<University> unis;
   late List<University> filteredUnis;
+  University? selectedUni;
 
   // Filter Variable
   String? region;
@@ -50,8 +53,6 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
   double groceriesCostSortValue = 1;
   double restaurantCostSortValue = 1;
 
-
-
   _UniversityMobilePageState(this.unis);
 
   @override
@@ -62,6 +63,8 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     filteredUnis = UniversitySorterHelper.globalSort(
       unis: filteredUnis,
       shanghaiWeight: shanghaiRankedSort ? shanghaiRankedSortValue : null,
@@ -71,6 +74,52 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
       groceriesCostWeight: groceriesCostSort ? groceriesCostSortValue : null,
       restaurantCostWeight: restaurantCostSort ? restaurantCostSortValue : null,
     );
+
+    Widget body;
+    if (selectedUni == null) {
+      body = ListView.separated(
+        itemCount: filteredUnis.length,
+        itemBuilder: (BuildContext context, int idx) {
+          University uni = filteredUnis[idx];
+          return ListTile(
+            leading: SvgPicture.network(
+              uni.country!.flag,
+              height: 16,
+            ),
+            title: Text(uni.school + ' ' + uni.additionalFees.toString()),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (uni.shanghaiRank != null)
+                  Text('S:${uni.shanghaiRank!.worldRank}'),
+                if (uni.icuRank != null)
+                  Text('ICU:${uni.icuRank!.worldRank}'),
+              ],
+            ),
+            onTap: () {
+              selectedUni = uni;
+              setState(() {
+              });
+            },
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            thickness: 2,
+          );
+        },
+      );
+    } else {
+      body = UniversityDetails(
+        selectedUni: selectedUni!,
+        closeWindow: () {
+          selectedUni = null;
+          setState(() {
+          });
+        },
+      );
+    }
+
     return Scaffold(
       floatingActionButtonLocation:
         FloatingActionButtonLocation.centerDocked,
@@ -359,33 +408,7 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
           ],
         ),
       ),
-      body: ListView.separated(
-        itemCount: filteredUnis.length,
-        itemBuilder: (BuildContext context, int idx) {
-          University uni = filteredUnis[idx];
-          return ListTile(
-            leading: SvgPicture.network(
-              uni.country!.flag,
-              height: 16,
-            ),
-            title: Text(uni.school + ' ' + uni.additionalFees.toString()),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (uni.shanghaiRank != null)
-                  Text('S:${uni.shanghaiRank!.worldRank}'),
-                if (uni.icuRank != null)
-                  Text('ICU:${uni.icuRank!.worldRank}'),
-              ],
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            thickness: 2,
-          );
-        },
-      ),
+      body: body,
     );
   }
 

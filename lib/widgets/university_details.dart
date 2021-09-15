@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tekfeed_helper/models/university.dart';
-
-import 'dart:js' as js; // ignore: avoid_web_libraries_in_flutter
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 class UniversityDetails extends StatelessWidget {
   final University selectedUni;
@@ -20,6 +20,7 @@ class UniversityDetails extends StatelessWidget {
     selectedUni.country!.languages.forEach((element) {
       languages += element.name != null ? (element.name! + ' ,') : '';
     });
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return Card(
       child: SingleChildScrollView(
         child: DataTable(
@@ -37,8 +38,9 @@ class UniversityDetails extends StatelessWidget {
             ),
             DataColumn(
               label: TextButton(
-                onPressed: () {
-                  js.context.callMethod('open', ['https://tekfeed.epitech.eu/#/universite/${selectedUni.tekfeedId}']);
+                onPressed: () async {
+                  var url = 'https://tekfeed.epitech.eu/#/universite/${selectedUni.tekfeedId}';
+                  await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
                 },
                 child: Row(
                   children: [
