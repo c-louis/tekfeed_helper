@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 part 'country.g.dart';
 
@@ -37,14 +38,15 @@ class Country {
 
   static Future<List<Country>> load() async {
     List<Country> countries = [];
-    var url = Uri.parse('https://restcountries.eu/rest/v2/all');
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var list = jsonDecode(response.body);
+//    var url = Uri.parse('https://restcountries.com/v3/all');
+//    var response = await http.get(url);
+//    if (response.statusCode == 200) {
+      String fileContent = await rootBundle.loadString('assets/data/country.json');
+      var list = jsonDecode(fileContent);
       for (var item in list) {
         countries.add(Country.fromJson(item));
       }
-    }
+//    }
     return Future.value(countries);
   }
 }

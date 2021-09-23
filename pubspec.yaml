@@ -2,7 +2,7 @@ name: tekfeed_helper
 description: A website to help choose university for 4th year in Epitech
 
 publish_to: 'none'
-version: 1.0.3+3a
+version: 1.0.4+4a
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -19,6 +19,7 @@ dependencies:
   shared_preferences: ^2.0.7
   flutter_svg: ^0.22.0
   url_launcher: ^6.0.10
+  catcher: ^0.6.8
 
 dev_dependencies:
   build_runner: ^2.1.1
@@ -31,6 +32,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
+  assets:
+    - assets/data/country.json
 
 flutter_icons:
   android: true
