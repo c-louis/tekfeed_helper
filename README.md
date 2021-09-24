@@ -1,16 +1,17 @@
 # tekfeed_helper
 
-A new Flutter project.
+A project to simplify university choice for Epitech TEK4 Year
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter application.
+### For the web :
+flutter build web
 
-A few resources to get you started if this is your first Flutter project:
+### For the app :
+flutter build apk
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Find
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Served web version : http://tekfeed.cl-dev.ovh
+Application on Play Store (Android) : http://shorturl.at/opvyG
+Application for iOs : Not available due to cost but "should" be working if authorization are add.
