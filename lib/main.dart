@@ -1,3 +1,4 @@
+import 'package:catcher/catcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tekfeed_helper/models/app_data.dart';
@@ -5,20 +6,56 @@ import 'package:tekfeed_helper/pages/university.dart';
 import 'package:vrouter/vrouter.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
+  CatcherOptions debugOptions = CatcherOptions(SilentReportMode(),
+    [
+      ConsoleHandler(),
+      DiscordHandler(
+        "https://discord.com/api/webhooks/890615891350396988/EsXlayV-Lo_LEVk9EV1ZKHN2fK9Gjnsj6EWAQlZmlF_tPevGzbaVQeMudYelJNlFM-5F",
+        enableApplicationParameters: true,
+        enableStackTrace: true,
+        enableDeviceParameters: true,
+        enableCustomParameters: true
+      )
+    ]
+  );
+
+  CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(),
+      [
+        ConsoleHandler(),
+        DiscordHandler(
+          "https://discord.com/api/webhooks/890615891350396988/EsXlayV-Lo_LEVk9EV1ZKHN2fK9Gjnsj6EWAQlZmlF_tPevGzbaVQeMudYelJNlFM-5F",
+          enableApplicationParameters: true,
+          enableStackTrace: true,
+          enableDeviceParameters: true,
+          enableCustomParameters: true
+        )
+      ],
+  );
+
+  Catcher(
+    rootWidget: AppRoot(),
+    debugConfig: debugOptions,
+    releaseConfig: releaseOptions,
+  );
+}
+
+class AppRoot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
       providers: [
         Provider<AppData>(create: (_) => AppData()),
       ],
       child: TekfeedRoutes(),
-    ),
-  );
+    );
+  }
 }
 
 class TekfeedRoutes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VRouter(
+      navigatorKey: Catcher.navigatorKey,
       routes: [
         VWidget(
           path: '/',
@@ -54,7 +91,9 @@ class LoginPage extends StatelessWidget {
             Expanded(
               child: Card(
                 child: InkWell(
-                  onTap: () => redirect(context, loadingData),
+                  onTap: () async {
+                    redirect(context, loadingData);
+                  },
                   child: Center(child: Text('No login')),
                 ),
               ),
