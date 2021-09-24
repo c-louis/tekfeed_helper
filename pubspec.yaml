@@ -2,7 +2,7 @@ name: tekfeed_helper
 description: A website to help choose university for 4th year in Epitech
 
 publish_to: 'none'
-version: 1.0.5+5a
+version: 1.0.6+6a
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

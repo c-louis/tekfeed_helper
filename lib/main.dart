@@ -19,7 +19,7 @@ void main() {
     ]
   );
 
-  CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(),
+  CatcherOptions releaseOptions = CatcherOptions(SilentReportMode(),
       [
         ConsoleHandler(),
         DiscordHandler(
