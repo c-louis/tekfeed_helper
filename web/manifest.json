@@ -1,11 +1,11 @@
 {
-    "name": "tekfeed_helper",
-    "short_name": "tekfeed_helper",
+    "name": "tekfeed helper",
+    "short_name": "tekfeed helper",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Tekfeed Helper, to help student choosing their destination.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
