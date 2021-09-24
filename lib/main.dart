@@ -42,7 +42,7 @@ void main() {
         enableApplicationParameters: true,
         enableStackTrace: true,
         enableDeviceParameters: true,
-        enableCustomParameters: true`,
+        enableCustomParameters: true,
         customMessageBuilder: buildMessage
       )
     ]
