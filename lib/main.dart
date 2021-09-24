@@ -5,6 +5,34 @@ import 'package:tekfeed_helper/models/app_data.dart';
 import 'package:tekfeed_helper/pages/university.dart';
 import 'package:vrouter/vrouter.dart';
 
+String buildMessage(Report report) {
+  final StringBuffer stringBuffer = StringBuffer();
+  stringBuffer.write("**Error:**\n${report.error}\n\n");
+    stringBuffer.write("**Stack trace:**\n```${report.stackTrace}``\n\n");
+  if (report.deviceParameters.isNotEmpty) {
+    stringBuffer.write("**Device parameters:**\n```");
+    for (final entry in report.deviceParameters.entries) {
+      stringBuffer.write("${entry.key}: ${entry.value}\n");
+    }
+    stringBuffer.write("```\n\n");
+  }
+  if (report.applicationParameters.isNotEmpty) {
+    stringBuffer.write("**Application parameters:**\n```");
+    for (final entry in report.applicationParameters.entries) {
+      stringBuffer.write("${entry.key}: ${entry.value}\n");
+    }
+    stringBuffer.write("```\n\n");
+  }
+  if (report.customParameters.isNotEmpty) {
+    stringBuffer.write("**Custom parameters:**\n```");
+    for (final entry in report.customParameters.entries) {
+      stringBuffer.write("${entry.key}: ${entry.value}\n");
+    }
+    stringBuffer.write("```\n\n");
+  }
+  return stringBuffer.toString();
+}
+
 void main() {
   CatcherOptions debugOptions = CatcherOptions(SilentReportMode(),
     [
@@ -14,7 +42,8 @@ void main() {
         enableApplicationParameters: true,
         enableStackTrace: true,
         enableDeviceParameters: true,
-        enableCustomParameters: true
+        enableCustomParameters: true`,
+        customMessageBuilder: buildMessage
       )
     ]
   );
@@ -27,7 +56,8 @@ void main() {
           enableApplicationParameters: true,
           enableStackTrace: true,
           enableDeviceParameters: true,
-          enableCustomParameters: true
+          enableCustomParameters: true,
+          customMessageBuilder: buildMessage
         )
       ],
   );
