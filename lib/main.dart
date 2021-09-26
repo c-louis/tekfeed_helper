@@ -5,6 +5,8 @@ import 'package:tekfeed_helper/models/app_data.dart';
 import 'package:tekfeed_helper/pages/university.dart';
 import 'package:vrouter/vrouter.dart';
 
+import 'models/app_state.dart';
+
 String buildMessage(Report report) {
   final StringBuffer stringBuffer = StringBuffer();
   stringBuffer.write("**Error:**\n${report.error}\n\n");
@@ -75,6 +77,7 @@ class AppRoot extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<AppData>(create: (_) => AppData()),
+        ChangeNotifierProvider(create: (_) => AppState()),
       ],
       child: TekfeedRoutes(),
     );
@@ -108,7 +111,7 @@ class TekfeedRoutes extends StatelessWidget {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Future<void> loadingData = Provider.of<AppData>(context, listen: false).loadData();
+    Future<void> loadingData = Provider.of<AppData>(context, listen: false).loadData(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -132,7 +135,7 @@ class LoginPage extends StatelessWidget {
               child: Card(
                 child: InkWell(
                   child: Center(
-                    child: Text('Use AutoLogin\nNot Yet available !', textAlign: TextAlign.center,)
+                      child: Text('Use AutoLogin\nNot Yet available !', textAlign: TextAlign.center,)
                   ),
                 ),
               ),

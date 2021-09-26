@@ -15,11 +15,11 @@ class UniversityPage extends StatelessWidget {
     }
     if (kIsWeb) {
       return Scaffold(
-        body: UniversityWebPage(data.unis),
+        body: UniversityWebPage(),
       );
     } else {
       return Scaffold(
-        body: UniversityMobilePage(data.unis),
+        body: UniversityMobilePage(),
       );
     }
   }

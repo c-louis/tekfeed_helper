@@ -1,14 +1,20 @@
+import 'package:provider/provider.dart';
 import 'package:tekfeed_helper/models/university.dart';
 
+import 'app_state.dart';
 import 'country.dart';
 
 class AppData {
   List<University> unis = [];
   List<Country> countries = [];
 
-  Future<void> loadData() async {
+  Future<void> loadData(context) async {
     await loadUnis();
     await loadCountries();
+    Provider.of<AppState>(context, listen: false).unis = unis;
+    Provider.of<AppState>(context, listen: false).filterUniversity();
+    Provider.of<AppState>(context, listen: false).sortUniversity();
+    Provider.of<AppState>(context, listen: false).setSliders();
   }
 
   Future<void> loadUnis() async {

@@ -6,7 +6,7 @@ class Filter extends StatelessWidget {
   final String name;
   final Function(bool?) onChanged;
   final bool? value;
-  MainAxisAlignment mainAxisAlignment;
+  final MainAxisAlignment mainAxisAlignment;
 
   Filter({
     required this.name,

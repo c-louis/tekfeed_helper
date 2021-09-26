@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tekfeed_helper/models/country.dart';
 import 'package:http/http.dart' as http;
+import 'package:tekfeed_helper/models/theme.dart';
 
 part 'university.g.dart';
 
@@ -14,17 +15,22 @@ class University {
   final String school;
   final String dates;
   final String language;
-  final bool dualDegree;
+  final String dualDegree;
   final double gpa;
-  final bool languageRequired;
   final double additionalFees;
   final int places;
   final int tekfeedId;
+  final String tepitech;
+  final String TOEFL;
+  final String IELTS;
+  final String TOEIC;
+  final String duolingo;
+  final List<Theme> themes;
   @JsonKey(name: 'shanghai_ranking') ShanghaiRankedUniversity? shanghaiRank;
   @JsonKey(name: 'icu_ranking') IcuRanking? icuRank;
   @JsonKey(ignore: true) Country? country;
 
-  University(this.countryName, this.city, this.school, this.dates, this.language, this.dualDegree, this.gpa, this.languageRequired, this.additionalFees, this.places, this.tekfeedId);
+  University(this.countryName, this.city, this.school, this.dates, this.language, this.dualDegree, this.gpa, this.additionalFees, this.places, this.tekfeedId, this.themes, this.tepitech, this.TOEFL, this.IELTS, this.TOEIC, this.duolingo);
   factory University.fromJson(json) {
     return University(
       json['country'] as String,
@@ -32,12 +38,17 @@ class University {
       json['school'] as String,
       json['dates'] as String,
       json['language'] as String,
-      json['dualDegree'] == 'TRUE' ? true : false,
+      ((json['dualDegree'] as String?) ?? ""),
       (double.parse(json['gpa'] as String)),
-      json['languageRequired'] == 'TRUE' ? true : false,
       (json['additionalFees'] as num).toDouble(),
       json['places'] as int,
       json['tekfeedId'] as int,
+      (json['themes'] as List<dynamic>).map((e) => Theme.fromJson(e)).toList(),
+      json['tepitech'] as String,
+      json['TOEFL'] as String,
+      json['IELTS'] as String,
+      json['TOEIC'] as String,
+      json['duolingo'] as String,
     )
       ..shanghaiRank = json['shanghai_ranking'] == null
           ? null
