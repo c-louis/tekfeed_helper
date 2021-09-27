@@ -96,7 +96,7 @@ class CostOfLiving {
 
   static Future<List<CostOfLiving>> load() async {
     List<CostOfLiving> col = [];
-    var url = Uri.parse('http://tekfeed-middle-api.cl-dev.ovh/col');
+    var url = Uri.parse('https://tekfeed-middle-api.cl-dev.ovh/col');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       var list = jsonDecode(response.body);

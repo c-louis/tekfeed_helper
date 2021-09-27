@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:tekfeed_helper/models/app_account.dart';
 import 'package:tekfeed_helper/models/university.dart';
 
 import 'app_state.dart';
@@ -11,6 +12,8 @@ class AppData {
   Future<void> loadData(context) async {
     await loadUnis();
     await loadCountries();
+    await Provider.of<AppAccount>(context, listen: false).loadLogin();
+    await Provider.of<AppAccount>(context, listen: false).loadPresets();
     Provider.of<AppState>(context, listen: false).unis = unis;
     Provider.of<AppState>(context, listen: false).filterUniversity();
     Provider.of<AppState>(context, listen: false).sortUniversity();

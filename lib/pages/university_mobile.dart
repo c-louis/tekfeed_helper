@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tekfeed_helper/models/app_account.dart';
 import 'package:tekfeed_helper/models/app_state.dart';
 import 'package:tekfeed_helper/models/university.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tekfeed_helper/widgets/filter_list.dart';
+import 'package:tekfeed_helper/widgets/presets.dart';
 import 'package:tekfeed_helper/widgets/sorter_list.dart';
 import 'package:tekfeed_helper/widgets/university_details.dart';
 
@@ -26,6 +28,7 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
   @override
   Widget build(BuildContext context) {
     AppState appState = Provider.of<AppState>(context);
+    AppAccount appAccount = Provider.of<AppAccount>(context);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     Widget body;
@@ -74,6 +77,18 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
     }
 
     return Scaffold(
+      appBar: !appAccount.isLogin ? null : AppBar(
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(appAccount.login.title ?? appAccount.login.firstname ?? 'No name'),
+            if (appAccount.login.gpa != null && appAccount.login.gpa!.length > 0)
+              Text('GPA : ${appAccount.login.gpa![0].gpa}'),
+            Text('Promo : ${appAccount.login.promo ?? 'Unknown Promotion'}'),
+          ],
+        ),
+      ),
       floatingActionButtonLocation:
         FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
@@ -147,6 +162,13 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
                 );
               },
               child: Icon(Icons.sort),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                showDialog(context: context, builder: (context) => Presets());
+              },
+              heroTag: null,
+              child: Icon(Icons.save),
             ),
           ],
         ),

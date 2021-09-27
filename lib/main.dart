@@ -1,7 +1,9 @@
 import 'package:catcher/catcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tekfeed_helper/models/app_account.dart';
 import 'package:tekfeed_helper/models/app_data.dart';
+import 'package:tekfeed_helper/pages/login.dart';
 import 'package:tekfeed_helper/pages/university.dart';
 import 'package:vrouter/vrouter.dart';
 
@@ -77,6 +79,7 @@ class AppRoot extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<AppData>(create: (_) => AppData()),
+        Provider<AppAccount>(create: (_) => AppAccount()),
         ChangeNotifierProvider(create: (_) => AppState()),
       ],
       child: TekfeedRoutes(),
@@ -105,49 +108,5 @@ class TekfeedRoutes extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       mode: VRouterMode.history,
     );
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Future<void> loadingData = Provider.of<AppData>(context, listen: false).loadData(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tekfeed Helper'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Expanded(
-              child: Card(
-                child: InkWell(
-                  onTap: () async {
-                    redirect(context, loadingData);
-                  },
-                  child: Center(child: Text('No login')),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Card(
-                child: InkWell(
-                  child: Center(
-                      child: Text('Use AutoLogin\nNot Yet available !', textAlign: TextAlign.center,)
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> redirect(BuildContext context, data) async {
-    await data;
-    VRouter.of(context).to('/unis');
   }
 }

@@ -64,7 +64,7 @@ class University {
     if (prefs.getString('unis-cache') != null) {
       return jsonDecode(prefs.getString('unis-cache')!);
     } else {
-      var url = Uri.parse('http://tekfeed-middle-api.cl-dev.ovh/universities?all=1');
+      var url = Uri.parse('https://tekfeed-middle-api.cl-dev.ovh/universities?all=1');
       var response = await http.get(url);
       var list = jsonDecode(response.body);
       List<University> unis = [];

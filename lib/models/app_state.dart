@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tekfeed_helper/helpers/university_filter.dart';
 import 'package:tekfeed_helper/helpers/university_information.dart';
 import 'package:tekfeed_helper/helpers/university_sorter.dart';
 import 'package:tekfeed_helper/models/university.dart';
 
+part 'app_state.g.dart';
+
+@JsonSerializable()
 class AppState extends ChangeNotifier {
+  AppState({this.region, this.language, List<String>? selectedCountries, List<String>? selectedThemes,
+    this.shanghaiRankedOnly = false, this.icuRankedOnly = false, this.noAdditionalFees = false, this.feesLimit = false,
+    this.feesMax = 0, this.noGpaRequired = false, this.gpaRequiredLimit = false, this.gpaRequiredMax = 0, this.tepitechRequiredLimit = false,
+    this.TOEFLRequiredLimit = false, this.IELTSRequiredLimit = false, this.TOEICRequiredLimit = false, this.duolingoRequiredLimit = false,
+    this.tepitechRequiredMax = 0, this.TOEFLRequiredMax = 0, this.IELTSRequiredMax = 0, this.TOEICRequiredMax = 0, this.duolingoRequiredMax = 0,
+    this.shanghaiRankedSort = false, this.icuRankedSort = false, this.costOfLivingSort = false, this.rentCostSort = false, this.groceriesCostSort = false,
+    this.restaurantCostSort = false, this.shanghaiRankedSortValue = 0, this.icuRankedSortValue = 0, this.costOfLivingSortValue = 0, this.rentCostSortValue = 0,
+    this.groceriesCostSortValue = 0, this.restaurantCostSortValue = 0, this.name = 'Default'
+  })
+   : selectedCountries  = selectedCountries ?? [],
+     selectedThemes = selectedThemes ?? [];
+
+  factory AppState.fromJson(Map<String, dynamic> json) => _$AppStateFromJson(json);
+  Map<String, dynamic> toJson() => _$AppStateToJson(this);
+
+  // App State variable
+  String? name = 'Default';
+
   // Filter Variable
   String? region;
   String? language;
@@ -31,16 +53,7 @@ class AppState extends ChangeNotifier {
   bool IELTSRequiredLimit = false;
   bool TOEICRequiredLimit = false;
   bool duolingoRequiredLimit = false;
-
-
-  void setSliders() {
-    tepitechRequiredMax = UniversityInformationHelper.minTepitech(unis);
-    TOEFLRequiredMax = UniversityInformationHelper.minTOEFL(unis);
-    IELTSRequiredMax = UniversityInformationHelper.minIELTS(unis);
-    TOEICRequiredMax = UniversityInformationHelper.minTOEIC(unis);
-    duolingoRequiredMax = UniversityInformationHelper.minDuolingo(unis);
-  }
-
+  // English filters value
   double tepitechRequiredMax = 0;
   double TOEFLRequiredMax = 0;
   double IELTSRequiredMax = 0;
@@ -63,11 +76,11 @@ class AppState extends ChangeNotifier {
   double restaurantCostSortValue = 1;
 
   // List of university Not to changed so final
-  List<University> unis = [];
+  @JsonKey(ignore: true) List<University> unis = [];
 
   // Filter and sort variable result
-  List<University> filteredAndSortedUnis = [];
-  University? selectedUni;
+  @JsonKey(ignore: true) List<University> filteredAndSortedUnis = [];
+  @JsonKey(ignore: true) University? selectedUni;
 
   void filterUniversity() {
     filteredAndSortedUnis = unis;
@@ -117,7 +130,6 @@ class AppState extends ChangeNotifier {
       filteredAndSortedUnis = UniversityFilterHelper.filterDuolingoInferior(filteredAndSortedUnis, duolingoRequiredMax);
     }
   }
-
   void sortUniversity() {
     filteredAndSortedUnis = UniversitySorterHelper.globalSort(
       unis: filteredAndSortedUnis,
@@ -129,4 +141,69 @@ class AppState extends ChangeNotifier {
       restaurantCostWeight: restaurantCostSort ? restaurantCostSortValue : null,
     );
   }
+  void setSliders() {
+    tepitechRequiredMax = UniversityInformationHelper.minTepitech(unis);
+    TOEFLRequiredMax = UniversityInformationHelper.minTOEFL(unis);
+    IELTSRequiredMax = UniversityInformationHelper.minIELTS(unis);
+    TOEICRequiredMax = UniversityInformationHelper.minTOEIC(unis);
+    duolingoRequiredMax = UniversityInformationHelper.minDuolingo(unis);
+  }
+
+  void load(AppState preset) {
+    print('Loading preset ${preset.name}');
+    // App State variable
+    name = preset.name;
+
+    region = preset.region;
+    language = preset.language;
+    selectedCountries = preset.selectedCountries;
+    selectedThemes = preset.selectedThemes;
+
+    // Ranking
+    shanghaiRankedOnly = preset.shanghaiRankedOnly;
+    icuRankedOnly = preset.icuRankedOnly;
+
+    // Fees slider Variable
+    noAdditionalFees = preset.noAdditionalFees;
+    feesLimit = preset.feesLimit;
+    feesMax = preset.feesMax;
+
+    // Gpa Filters
+    noGpaRequired = preset.noGpaRequired;
+    gpaRequiredLimit = preset.gpaRequiredLimit;
+    gpaRequiredMax = preset.gpaRequiredMax;
+
+    // English filters
+    tepitechRequiredLimit = preset.tepitechRequiredLimit;
+    TOEFLRequiredLimit = preset.TOEFLRequiredLimit;
+    IELTSRequiredLimit = preset.IELTSRequiredLimit;
+    TOEICRequiredLimit = preset.TOEICRequiredLimit;
+    duolingoRequiredLimit = preset.duolingoRequiredLimit;
+    // English filters value
+    tepitechRequiredMax = preset.tepitechRequiredMax;
+    TOEFLRequiredMax = preset.TOEFLRequiredMax;
+    IELTSRequiredMax = preset.IELTSRequiredMax;
+    TOEICRequiredMax = preset.TOEICRequiredMax;
+    duolingoRequiredMax = preset.duolingoRequiredMax;
+
+    // Sort Activation Variable
+    shanghaiRankedSort = preset.shanghaiRankedSort;
+    icuRankedSort = preset.icuRankedSort;
+    costOfLivingSort = preset.costOfLivingSort;
+    rentCostSort = preset.rentCostSort;
+    groceriesCostSort = preset.groceriesCostSort;
+    restaurantCostSort = preset.restaurantCostSort;
+    // Sort Sliders Variable
+    shanghaiRankedSortValue = preset.shanghaiRankedSortValue;
+    icuRankedSortValue = preset.icuRankedSortValue;
+    costOfLivingSortValue = preset.costOfLivingSortValue;
+    rentCostSortValue = preset.rentCostSortValue;
+    groceriesCostSortValue = preset.groceriesCostSortValue;
+    restaurantCostSortValue = preset.restaurantCostSortValue;
+
+    filterUniversity();
+    sortUniversity();
+    notifyListeners();
+  }
+
 }
