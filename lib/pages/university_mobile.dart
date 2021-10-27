@@ -37,11 +37,10 @@ class _UniversityMobilePageState extends State<UniversityMobilePage> {
         itemCount: appState.filteredAndSortedUnis.length,
         itemBuilder: (BuildContext context, int idx) {
           University uni = appState.filteredAndSortedUnis[idx];
+          var flagName = uni.country!.flag.substring(uni.country!.flag.length - 7, uni.country!.flag.length).replaceAll('svg', 'png');
+          var flagPath = 'assets/countries/$flagName';
           return ListTile(
-            leading: SvgPicture.network(
-              uni.country!.flag,
-              height: 16,
-            ),
+            leading: Image.asset(flagPath, width: 32),
             title: Text(uni.school),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,

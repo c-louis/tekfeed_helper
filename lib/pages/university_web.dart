@@ -100,7 +100,7 @@ class _UniversityWebPageState extends State<UniversityWebPage> {
                         setState(() {});
                       },
                       cells: [
-                        DataCell(SvgPicture.network(uni.country!.flag, height: 32,)),
+                        DataCell(Image.asset('assets/countries/' + uni.country!.flag.substring(uni.country!.flag.length - 7, uni.country!.flag.length).replaceAll('svg', 'png'), width: 32)),
                         DataCell(Text(uni.school)),
                         DataCell(Text(uni.language)),
                         DataCell(Text((uni.shanghaiRank != null ? uni.shanghaiRank!.worldRank.toString() : ''))),

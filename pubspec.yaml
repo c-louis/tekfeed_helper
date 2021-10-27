@@ -35,6 +35,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/country.json
+    - assets/countries/
 
 flutter_icons:
   android: true
